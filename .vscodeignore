@@ -1,0 +1,17 @@
+# Source and config not needed at runtime
+src/**
+tsconfig.json
+vitest.config.ts
+.tokenlintignore
+.gitignore
+.github/**
+
+# Dev tooling
+scripts/**
+**/*.test.ts
+coverage/**
+
+# Misc
+*.vsix
+.vscode/**
+node_modules/.package-lock.json

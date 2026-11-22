@@ -1,0 +1,155 @@
+{
+  "name": "tokenlint-vscode",
+  "displayName": "TokenLint",
+  "description": "Compiler-style prompt, AI skill, MCP, and cognitive security linter for VS Code",
+  "version": "1.0.4",
+  "publisher": "tokenlint",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Linters",
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "tokenlint.scanCurrentFile",
+        "title": "TokenLint: Scan Current File"
+      },
+      {
+        "command": "tokenlint.scanWorkspace",
+        "title": "TokenLint: Scan Workspace"
+      },
+      {
+        "command": "tokenlint.scanOrFix",
+        "title": "TokenLint: Scan / Fix..."
+      },
+      {
+        "command": "tokenlint.generateReport",
+        "title": "TokenLint: Generate Report"
+      },
+      {
+        "command": "tokenlint.showIR",
+        "title": "TokenLint: Show IR"
+      },
+      {
+        "command": "tokenlint.applyAllSafeFixes",
+        "title": "TokenLint: Apply All Safe Fixes"
+      },
+      {
+        "command": "tokenlint.showFixGraph",
+        "title": "TokenLint: Show Before / After Graph"
+      }
+    ],
+    "configuration": {
+      "title": "TokenLint",
+      "properties": {
+        "tokenlint.maxPromptTokens": {
+          "type": "number",
+          "default": 4000,
+          "description": "Token threshold for large prompt warning"
+        },
+        "tokenlint.criticalPromptTokens": {
+          "type": "number",
+          "default": 8000,
+          "description": "Token threshold for critical prompt warning"
+        },
+        "tokenlint.maxTopK": {
+          "type": "number",
+          "default": 10,
+          "description": "Retrieval top_k threshold"
+        },
+        "tokenlint.enableSecurityScanner": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable AI skill and prompt security scanner"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "tokenlint",
+          "title": "TokenLint",
+          "icon": "media/tokenlint.svg"
+        }
+      ]
+    },
+    "views": {
+      "tokenlint": [
+        {
+          "id": "tokenlint.sidebar",
+          "name": "TokenLint",
+          "type": "webview",
+          "icon": "media/tokenlint.svg"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "tokenlint.scanCurrentFile",
+          "when": "view == tokenlint.sidebar",
+          "group": "tokenlint@1"
+        },
+        {
+          "command": "tokenlint.scanWorkspace",
+          "when": "view == tokenlint.sidebar",
+          "group": "tokenlint@2"
+        },
+        {
+          "command": "tokenlint.scanOrFix",
+          "when": "view == tokenlint.sidebar",
+          "group": "tokenlint@3"
+        },
+        {
+          "command": "tokenlint.applyAllSafeFixes",
+          "when": "view == tokenlint.sidebar",
+          "group": "tokenlint@4"
+        },
+        {
+          "command": "tokenlint.generateReport",
+          "when": "view == tokenlint.sidebar",
+          "group": "tokenlint@5"
+        },
+        {
+          "command": "tokenlint.showIR",
+          "when": "view == tokenlint.sidebar",
+          "group": "tokenlint@6"
+        },
+        {
+          "command": "tokenlint.showFixGraph",
+          "when": "view == tokenlint.sidebar",
+          "group": "tokenlint@7"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "package": "vsce package",
+    "release:local": "node ./scripts/release-local-extension.mjs"
+  },
+  "dependencies": {
+    "gpt-tokenizer": "^2.1.0",
+    "yaml": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.90.0",
+    "@vitest/coverage-v8": "^4.1.6",
+    "@vscode/vsce": "^2.15.0",
+    "typescript": "^5.4.0",
+    "vitest": "^4.1.6"
+  }
+}

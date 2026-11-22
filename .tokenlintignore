@@ -1,0 +1,12 @@
+# TokenLint self-hosting exclusions
+
+.github/**
+package-lock.json
+package.json
+README.md
+src/core/**
+src/extension/**
+src/reporting/**
+src/test-fixtures/**
+tsconfig.json
+vitest.config.ts

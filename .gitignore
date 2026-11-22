@@ -1,0 +1,47 @@
+# Dependencies
+node_modules
+
+# Build outputs
+**/dist
+**/coverage
+*.txt
+
+# Python
+__pycache__
+*.pyc
+.venv
+/venv*/
+/.venv*/
+/server/venv
+.coverage
+
+# Test artifacts
+playwright-report
+test-results
+
+# IDE / OS
+.DS_Store
+.vscode
+.prettierrc
+.prettier.*
+
+# Task runner
+.task/**/*
+**/.task/**/*
+
+# Environment
+.env
+
+# Project-specific
+/external-files/*
+/external-files.*
+/bin
+/output/
+/server/output/
+/server/logs/
+/temp
+**/tmp
+**/tmp.*
+**/*.tmp
+*.vsix
+/out/
