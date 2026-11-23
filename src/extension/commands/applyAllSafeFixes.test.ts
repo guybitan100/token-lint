@@ -106,7 +106,7 @@ describe('applyAllSafeFixes', () => {
     await applyAllSafeFixes({ scan: vi.fn() } as never);
 
     expect(vscodeMock.showInformationMessage).toHaveBeenCalledWith(
-      'TokenLint: Open a file in the editor to apply safe fixes.'
+      'AI-Security: Open a file in the editor to apply safe fixes.'
     );
   });
 
@@ -145,7 +145,7 @@ describe('applyAllSafeFixes', () => {
     };
     vscodeMock.getDiagnostics.mockReturnValue([
       {
-        source: 'TokenLint',
+        source: 'AI-Security',
         code: 'security.promptInjection',
         range: { start: { line: 1 } }
       }
@@ -156,7 +156,7 @@ describe('applyAllSafeFixes', () => {
     expect(provider.scan).toHaveBeenCalledWith(document);
     expect(vscodeMock.applyEdit).not.toHaveBeenCalled();
     expect(vscodeMock.showInformationMessage).toHaveBeenCalledWith(
-      'TokenLint: No safe automatic fixes available. 1 review-required quick fix available from Quick Fix.'
+      'AI-Security: No safe automatic fixes available. 1 review-required quick fix available from Quick Fix.'
     );
   });
 
@@ -178,7 +178,7 @@ describe('applyAllSafeFixes', () => {
     expect(provider.scan).toHaveBeenCalledWith(document);
     expect(vscodeMock.applyEdit).not.toHaveBeenCalled();
     expect(vscodeMock.showInformationMessage).toHaveBeenCalledWith(
-      'TokenLint: No safe automatic fixes available.'
+      'AI-Security: No safe automatic fixes available.'
     );
   });
 
@@ -199,7 +199,7 @@ describe('applyAllSafeFixes', () => {
     const provider = {
       scan: vi.fn(() => {
         diagnostics = [{
-          source: 'TokenLint',
+          source: 'AI-Security',
           code: 'optimization.duplicateInstruction',
           range: {
             start: {
@@ -254,7 +254,7 @@ describe('applyAllSafeFixes', () => {
       }
     ]);
     expect(document.save).toHaveBeenCalledTimes(1);
-    expect(vscodeMock.showInformationMessage).toHaveBeenCalledWith('TokenLint applied 1 safe fixes.');
+    expect(vscodeMock.showInformationMessage).toHaveBeenCalledWith('AI-Security applied 1 safe fixes.');
     expect(showFixGraphMock.showFixGraphPreview).toHaveBeenCalledWith({
       fileName: '/workspace/prompt.md',
       beforeText: 'before text',
@@ -315,7 +315,7 @@ describe('applyAllSafeFixes', () => {
     };
     vscodeMock.getDiagnostics.mockReturnValue([
       {
-        source: 'TokenLint',
+        source: 'AI-Security',
         code: 'optimization.duplicateInstruction',
         range: { start: { line: 4 } }
       }
@@ -327,7 +327,7 @@ describe('applyAllSafeFixes', () => {
     expect(document.save).not.toHaveBeenCalled();
     expect(showFixGraphMock.showFixGraphPreview).not.toHaveBeenCalled();
     expect(vscodeMock.showInformationMessage).not.toHaveBeenCalledWith(
-      'TokenLint applied 1 safe fixes.'
+      'AI-Security applied 1 safe fixes.'
     );
   });
 
@@ -350,7 +350,7 @@ describe('applyAllSafeFixes', () => {
     expect(provider.scan).not.toHaveBeenCalled();
     expect(vscodeMock.applyEdit).not.toHaveBeenCalled();
     expect(vscodeMock.showInformationMessage).toHaveBeenCalledWith(
-      'TokenLint skipped unsupported file type'
+      'AI-Security skipped unsupported file type'
     );
   });
 });

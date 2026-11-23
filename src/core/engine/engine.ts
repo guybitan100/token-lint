@@ -2,9 +2,6 @@ import { parseToIR } from '../parser/parser';
 import { TokenLintFinding } from './finding';
 import { TokenLintPass } from './pass';
 
-import { duplicateInstructionPass } from '../passes/optimization/duplicateInstructionPass';
-import { promptSizePass } from '../passes/optimization/promptSizePass';
-import { oversizedExamplePass } from '../passes/optimization/oversizedExamplePass';
 import { retrievalRiskPass } from '../passes/retrieval/retrievalRiskPass';
 import { contextAmplificationPass } from '../passes/retrieval/contextAmplificationPass';
 
@@ -30,9 +27,6 @@ export function analyze(text: string, fileName: string): AnalysisResult {
   const ir = parseToIR(text, fileName);
 
   const passes: TokenLintPass[] = [
-    duplicateInstructionPass,
-    promptSizePass,
-    oversizedExamplePass,
     retrievalRiskPass,
     contextAmplificationPass,
     promptInjectionPass,

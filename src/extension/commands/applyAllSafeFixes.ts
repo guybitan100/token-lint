@@ -8,7 +8,7 @@ export async function applyAllSafeFixes(provider: TokenLintDiagnosticProvider) {
   const editor = vscode.window.activeTextEditor;
   if (!editor) {
     vscode.window.showInformationMessage(
-      'TokenLint: Open a file in the editor to apply safe fixes.'
+      'AI-Security: Open a file in the editor to apply safe fixes.'
     );
     return;
   }
@@ -17,7 +17,7 @@ export async function applyAllSafeFixes(provider: TokenLintDiagnosticProvider) {
 
   if (!shouldAnalyzeFile(document.fileName)) {
     vscode.window.showInformationMessage(
-      `TokenLint skipped ${getSkipReason(document.fileName)}`
+      `AI-Security skipped ${getSkipReason(document.fileName)}`
     );
     return;
   }
@@ -37,12 +37,12 @@ export async function applyAllSafeFixes(provider: TokenLintDiagnosticProvider) {
     if (reviewRequiredFixes.length) {
       const suffix = reviewRequiredFixes.length === 1 ? '' : 'es';
       vscode.window.showInformationMessage(
-        `TokenLint: No safe automatic fixes available. ${reviewRequiredFixes.length} review-required quick fix${suffix} available from Quick Fix.`
+        `AI-Security: No safe automatic fixes available. ${reviewRequiredFixes.length} review-required quick fix${suffix} available from Quick Fix.`
       );
       return;
     }
 
-    vscode.window.showInformationMessage('TokenLint: No safe automatic fixes available.');
+    vscode.window.showInformationMessage('AI-Security: No safe automatic fixes available.');
     return;
   }
 
@@ -59,7 +59,7 @@ export async function applyAllSafeFixes(provider: TokenLintDiagnosticProvider) {
   if (success) {
     await document.save();
     vscode.window.showInformationMessage(
-      `TokenLint applied ${safeFixes.length} safe fixes.`
+      `AI-Security applied ${safeFixes.length} safe fixes.`
     );
     showFixGraphPreview({
       fileName: document.fileName,

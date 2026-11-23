@@ -19,7 +19,7 @@ export function activate(context: vscode.ExtensionContext) {
   const sidebarProvider = new TokenLintSidebarProvider(context.extensionUri);
 
   const statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 100);
-  statusBar.text = 'TokenLint: Ready';
+  statusBar.text = 'AI-Security: Ready';
   statusBar.show();
 
   const supportedSelectors: vscode.DocumentSelector = [
@@ -43,7 +43,7 @@ export function activate(context: vscode.ExtensionContext) {
       if (editor) {
         const cached = diagnostics.getCached(editor.document);
         if (cached) {
-          statusBar.text = `TokenLint: ${cached.metrics.findingCount} findings | ${cached.metrics.totalTokens} tokens`;
+          statusBar.text = `AI-Security: ${cached.metrics.findingCount} findings | ${cached.metrics.totalTokens} tokens`;
         }
       }
     }),
@@ -93,7 +93,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
 
     const result = diagnostics.scan(document);
-    statusBar.text = `TokenLint: ${result.metrics.findingCount} findings | ${result.metrics.totalTokens} tokens`;
+    statusBar.text = `AI-Security: ${result.metrics.findingCount} findings | ${result.metrics.totalTokens} tokens`;
   });
 }
 

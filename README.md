@@ -1,35 +1,23 @@
-# TokenLint VS Code Compiler MVP
+# AI-Security for VS Code
 
-TokenLint is a compiler-style VS Code extension for prompts, AI skills, MCP workflows, and cognitive security.
+AI-Security is a compiler-style VS Code extension that finds security risks in prompts, AI skills, MCP workflows, and agent instructions before they reach production.
 
-## What This MVP Includes
+## What it detects
 
-- Real VS Code extension entrypoint
-- Compiler-style IR
-- Parser from prompt/skill files into IR
-- Optimization passes
-- Retrieval passes
-- Security passes
-- Malicious skill test detection
-- Prompt injection detection
-- Encoded payload detection
-- Unsafe permission detection
-- External endpoint detection
-- Diagnostics
-- Hover provider
-- Quick fixes
-- Workspace scanner
-- Markdown report generator
-- Show IR command
-- Before / after fix graph preview
+- Prompt injection and instruction hijacking
+- Unsafe permissions and suspicious skill behavior
+- Encoded payloads
+- Unreviewed external endpoints
+- Retrieval amplification and risky `top_k` settings
+- Oversized prompts, duplicate instructions, and oversized examples
 
-## Activity Bar Sidebar
+## Workflow
 
-TokenLint now adds a dedicated Activity Bar icon in VS Code.
+AI-Security parses supported artifacts into an intermediate representation, runs security analysis passes, and reports findings through VS Code diagnostics, hover details, quick fixes, and Markdown reports. Token counts are retained as scan metadata only; prompt-size optimization is intentionally outside this project’s scope.
 
-The sidebar includes:
+The Activity Bar sidebar provides:
 
-- Scan / Fix... quick action
+- Scan / Fix
 - Scan Current File
 - Scan Workspace
 - Generate Report
@@ -37,121 +25,50 @@ The sidebar includes:
 - Apply All Safe Fixes
 - Show Before / After Graph
 
-## Fix Engine
+## Safe fixes
 
-TokenLint includes a safe fix engine.
+Security fixes are review-oriented: they can neutralize suspicious instructions, annotate external endpoints, replace encoded payloads with review markers, and reduce risky retrieval settings. A human makes the final security decision.
 
-### Safe automatic fixes
+## Scan scope
 
-- Remove exact duplicate instructions
+Workspace scans analyze `.md`, `.prompt`, `.yaml`, `.yml`, `.json`, `.ts`, `.tsx`, and `.py` files that look like AI artifacts, including `AGENTS.md`, `copilot-instructions.md`, `.github/agents/**`, `skills/**`, and `mcp.json`.
 
-`TokenLint: Apply All Safe Fixes` rescans the active editor before applying fixes, so duplicate-instruction removals work even if the file has not been scanned manually yet.
-
-### Review-required fixes
-
-- Reduce `top_k`
-- Neutralize suspicious prompt-injection phrases
-- Comment external endpoints for review
-- Disable suspicious skill tests
-- Replace suspicious encoded payloads with a review marker
+Generated lockfiles are skipped automatically. Workspace exclusions are read from `.ai-securityignore`; `.tokenlintignore` remains supported for existing workspaces.
 
 ## Commands
 
-- `TokenLint: Scan / Fix...`
-- `TokenLint: Scan Current File`
-- `TokenLint: Scan Workspace`
-- `TokenLint: Generate Report`
-- `TokenLint: Show IR`
-- `TokenLint: Apply All Safe Fixes`
-- `TokenLint: Show Before / After Graph`
-
-## Scan Scope
-
-TokenLint analyzes prompt artifacts and skips known generated or ignored content.
-
-- Workspace scans consider `.md`, `.prompt`, `.yaml`, `.yml`, `.json`, `.ts`, `.tsx`, and `.py`
-- Files must also look like skill, agent, prompt, or MCP artifacts based on their path or file name, for example `AGENTS.md`, `copilot-instructions.md`, `.github/agents/**`, `skills/**`, or `mcp.json`
-- Generated dependency lockfiles are skipped automatically: `bun.lockb`, `package-lock.json`, `pnpm-lock.yaml`, `pnpm-lock.yml`, `yarn.lock`
-- Workspace exclusions are read from `.tokenlintignore`
-
-## Testing And Coverage
-
-TokenLint uses Vitest with V8 coverage.
-
-```bash
-npm test
-npm run test:coverage
-```
-
-Coverage is enforced at 95% for statements, branches, functions, and lines.
-
-The coverage run targets `src/**/*.ts` and excludes:
-
-- test files
-- type-only contracts such as IR and fix interfaces
-- test utilities under `src/test-utils/**`
+- `AI-Security: Scan / Fix...`
+- `AI-Security: Scan Current File`
+- `AI-Security: Scan Workspace`
+- `AI-Security: Generate Report`
+- `AI-Security: Show IR`
+- `AI-Security: Apply All Safe Fixes`
+- `AI-Security: Show Before / After Graph`
 
 ## Development
 
 ```bash
 npm install
 npm run compile
+npm test
 ```
 
-Then press F5 in VS Code to open the Extension Development Host.
+Press F5 in VS Code to open the Extension Development Host.
+
+## Test fixture
+
+Open `src/test-fixtures/unsafe-skill.yaml` and run `AI-Security: Scan Current File`. The fixture contains examples of prompt injection, unsafe permissions, retrieval amplification, malicious skill-test behavior, and external endpoints.
 
 ## Architecture
 
 ```text
-Source Files
+AI Artifacts
   ↓
-Parser
+Parser → Intermediate Representation
   ↓
-IR - Intermediate Representation
+Optimization and retrieval analysis
   ↓
-Optimization Passes
+AI security analysis
   ↓
-Retrieval Passes
-  ↓
-Security Passes
-  ↓
-Diagnostics / Hover / Quick Fixes / Reports
+Diagnostics / quick fixes / reports
 ```
-
-## Test Fixture
-
-Open:
-
-```text
-src/test-fixtures/unsafe-skill.yaml
-```
-
-Run:
-
-```text
-TokenLint: Scan Current File
-```
-
-You should see findings for:
-
-- prompt injection
-- unsafe permissions
-- retrieval amplification
-- malicious skill test behavior
-- external endpoint
-
-You can also run:
-
-```text
-TokenLint: Apply All Safe Fixes
-```
-
-to automatically remove exact duplicate instructions after the file is rescanned.
-
-Or run:
-
-```text
-TokenLint: Show Before / After Graph
-```
-
-to open a visual preview of the current scan state, the safe automatic changes, and the findings that still need manual review.

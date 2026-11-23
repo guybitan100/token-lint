@@ -8,7 +8,7 @@ export function buildMarkdownReport(results: Array<{ fileName: string; result: A
   const warnings = results.reduce((sum, r) => sum + r.result.metrics.warningCount, 0);
 
   const lines: string[] = [
-    '# TokenLint Workspace Report',
+    '# AI-Security Workspace Report',
     '',
     `Files scanned: ${totalFiles}`,
     `Total tokens: ${totalTokens}`,

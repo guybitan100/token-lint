@@ -8,11 +8,11 @@ describe('analyze', () => {
     expect(result.metrics.totalTokens).toBeGreaterThan(0);
   });
 
-  it('detects duplicate instructions', () => {
+  it('does not report token optimization issues', () => {
     const text = '- Always respond in JSON format\n- Always respond in JSON format';
     const result = analyze(text, 'test.md');
     const dupes = result.findings.filter(f => f.ruleId.includes('duplicateInstruction'));
-    expect(dupes.length).toBe(1);
+    expect(dupes).toHaveLength(0);
   });
 
   it('detects prompt injection patterns', () => {

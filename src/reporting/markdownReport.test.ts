@@ -19,7 +19,7 @@ describe('buildMarkdownReport', () => {
       { fileName: 'a.md', result: makeResult([], 50) },
       { fileName: 'b.md', result: makeResult([], 75) }
     ]);
-    expect(report).toContain('# TokenLint Workspace Report');
+    expect(report).toContain('# AI-Security Workspace Report');
     expect(report).toContain('Files scanned: 2');
     expect(report).toContain('Total tokens: 125');
   });

@@ -1,9 +1,9 @@
 {
-  "name": "tokenlint-vscode",
-  "displayName": "TokenLint",
-  "description": "Compiler-style prompt, AI skill, MCP, and cognitive security linter for VS Code",
+  "name": "ai-security",
+  "displayName": "AI-Security",
+  "description": "AI-Security scanner for prompts, skills, MCP workflows, and agent instructions in VS Code",
   "version": "1.0.4",
-  "publisher": "tokenlint",
+  "publisher": "ai-security",
   "engines": {
     "vscode": "^1.90.0"
   },
@@ -20,46 +20,36 @@
     "commands": [
       {
         "command": "tokenlint.scanCurrentFile",
-        "title": "TokenLint: Scan Current File"
+        "title": "AI-Security: Scan Current File"
       },
       {
         "command": "tokenlint.scanWorkspace",
-        "title": "TokenLint: Scan Workspace"
+        "title": "AI-Security: Scan Workspace"
       },
       {
         "command": "tokenlint.scanOrFix",
-        "title": "TokenLint: Scan / Fix..."
+        "title": "AI-Security: Scan / Fix..."
       },
       {
         "command": "tokenlint.generateReport",
-        "title": "TokenLint: Generate Report"
+        "title": "AI-Security: Generate Report"
       },
       {
         "command": "tokenlint.showIR",
-        "title": "TokenLint: Show IR"
+        "title": "AI-Security: Show IR"
       },
       {
         "command": "tokenlint.applyAllSafeFixes",
-        "title": "TokenLint: Apply All Safe Fixes"
+        "title": "AI-Security: Apply All Safe Fixes"
       },
       {
         "command": "tokenlint.showFixGraph",
-        "title": "TokenLint: Show Before / After Graph"
+        "title": "AI-Security: Show Before / After Graph"
       }
     ],
     "configuration": {
-      "title": "TokenLint",
+      "title": "AI-Security",
       "properties": {
-        "tokenlint.maxPromptTokens": {
-          "type": "number",
-          "default": 4000,
-          "description": "Token threshold for large prompt warning"
-        },
-        "tokenlint.criticalPromptTokens": {
-          "type": "number",
-          "default": 8000,
-          "description": "Token threshold for critical prompt warning"
-        },
         "tokenlint.maxTopK": {
           "type": "number",
           "default": 10,
@@ -76,7 +66,7 @@
       "activitybar": [
         {
           "id": "tokenlint",
-          "title": "TokenLint",
+          "title": "AI-Security",
           "icon": "media/tokenlint.svg"
         }
       ]
@@ -85,7 +75,7 @@
       "tokenlint": [
         {
           "id": "tokenlint.sidebar",
-          "name": "TokenLint",
+          "name": "AI-Security",
           "type": "webview",
           "icon": "media/tokenlint.svg"
         }

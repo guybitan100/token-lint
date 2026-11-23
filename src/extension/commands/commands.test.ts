@@ -109,7 +109,7 @@ describe('extension commands', () => {
 
     await scanCurrentFile(provider as never);
     expect(commandMocks.showInformationMessage).toHaveBeenLastCalledWith(
-      'TokenLint: Open a file in the editor to scan it.'
+      'AI-Security: Open a file in the editor to scan it.'
     );
 
     const document = { fileName: 'ignored.md', getText: () => '' };
@@ -119,14 +119,14 @@ describe('extension commands', () => {
 
     await scanCurrentFile(provider as never);
     expect(commandMocks.showInformationMessage).toHaveBeenLastCalledWith(
-      'TokenLint skipped unsupported file type'
+      'AI-Security skipped unsupported file type'
     );
 
     commandMocks.shouldAnalyzeFile.mockReturnValue(true);
     await scanCurrentFile(provider as never);
     expect(provider.scan).toHaveBeenCalledWith(document);
     expect(commandMocks.showInformationMessage).toHaveBeenLastCalledWith(
-      'TokenLint: 2 findings, 40 tokens'
+      'AI-Security: 2 findings, 40 tokens'
     );
   });
 
@@ -161,14 +161,14 @@ describe('extension commands', () => {
       '**/node_modules/**'
     );
     expect(commandMocks.showInformationMessage).toHaveBeenLastCalledWith(
-      'TokenLint workspace scan complete: 1 files, 1 findings, 10 tokens, 1 ignored'
+      'AI-Security workspace scan complete: 1 files, 1 findings, 10 tokens, 1 ignored'
     );
 
     commandMocks.showInformationMessage.mockReset();
     commandMocks.shouldAnalyzeFile.mockReturnValue(true);
     await scanWorkspace(secondProvider as never);
     expect(commandMocks.showInformationMessage).toHaveBeenLastCalledWith(
-      'TokenLint workspace scan complete: 2 files, 3 findings, 30 tokens'
+      'AI-Security workspace scan complete: 2 files, 3 findings, 30 tokens'
     );
   });
 
@@ -218,7 +218,7 @@ describe('extension commands', () => {
     });
     await scanOrFix();
     expect(commandMocks.showInformationMessage).toHaveBeenCalledWith(
-      'TokenLint: Open a file in the editor to run that action.'
+      'AI-Security: Open a file in the editor to run that action.'
     );
 
     commandMocks.state.activeTextEditor = {
@@ -262,7 +262,7 @@ describe('extension commands', () => {
   it('showFixGraph validates editor access and renders a before/after preview', async () => {
     await showFixGraph();
     expect(commandMocks.showInformationMessage).toHaveBeenLastCalledWith(
-      'TokenLint: Open a file in the editor to visualize before/after changes.'
+      'AI-Security: Open a file in the editor to visualize before/after changes.'
     );
 
     const lines = [
@@ -283,7 +283,7 @@ describe('extension commands', () => {
 
     await showFixGraph();
     expect(commandMocks.showInformationMessage).toHaveBeenLastCalledWith(
-      'TokenLint skipped unsupported file type'
+      'AI-Security skipped unsupported file type'
     );
 
     commandMocks.showInformationMessage.mockReset();
@@ -352,7 +352,7 @@ describe('extension commands', () => {
     );
     expect(commandMocks.createWebviewPanel).toHaveBeenCalledWith(
       'tokenlint.fixGraph',
-      'TokenLint: Before / After Graph',
+      'AI-Security: Before / After Graph',
       'beside',
       { enableScripts: false }
     );

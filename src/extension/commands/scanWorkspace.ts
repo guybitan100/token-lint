@@ -18,7 +18,7 @@ export async function scanWorkspace(provider: TokenLintDiagnosticProvider) {
   }
 
   vscode.window.showInformationMessage(
-    `TokenLint workspace scan complete: ${analyzableFiles.length} files, ${findingCount} findings, ${tokenCount} tokens${
+    `AI-Security workspace scan complete: ${analyzableFiles.length} files, ${findingCount} findings, ${tokenCount} tokens${
       skippedFiles > 0 ? `, ${skippedFiles} ignored` : ''
     }`
   );

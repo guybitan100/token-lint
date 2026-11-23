@@ -74,7 +74,7 @@ describe('vscodeMapping', () => {
     expect(diagnostic).toMatchObject({
       message: 'Suspicious instruction',
       severity: mappingMocks.DiagnosticSeverity.Error,
-      source: 'TokenLint',
+      source: 'AI-Security',
       code: 'security.promptInjection'
     });
   });

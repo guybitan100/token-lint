@@ -114,9 +114,9 @@ export class TokenLintSidebarProvider implements vscode.WebviewViewProvider {
   </style>
 </head>
 <body>
-  <div class="title">TokenLint</div>
+  <div class="title">AI-Security</div>
   <div class="subtitle">
-    Compiler-style diagnostics for prompts, skills, MCP workflows, and cognitive security.
+    Security analysis for prompts, skills, MCP workflows, and AI agent instructions.
   </div>
 
   <div class="section">Scan</div>
@@ -128,13 +128,12 @@ export class TokenLintSidebarProvider implements vscode.WebviewViewProvider {
   <button class="secondary" data-command="generateReport">Generate Report</button>
   <button class="secondary" data-command="showIR">Show IR</button>
 
-  <div class="section">Fixes</div>
+  <div class="section">Security actions</div>
   <button data-command="applyAllSafeFixes">Apply All Safe Fixes</button>
   <button class="secondary" data-command="showFixGraph">Show Before / After Graph</button>
 
   <div class="note">
-    Safe automatic fixes currently remove exact duplicate instructions.
-    Use the graph preview to compare the current file against the projected safe-fix result.
+    Review every proposed security action before applying it. Use the graph preview to inspect projected changes.
   </div>
 
   <script nonce="${nonce}">

@@ -169,7 +169,7 @@ describe('extension providers', () => {
       metrics: { findingCount: 1, totalTokens: 10, errorCount: 0, warningCount: 1 },
       ir: { type: 'prompt' }
     };
-    const mappedDiagnostic = { source: 'TokenLint' };
+    const mappedDiagnostic = { source: 'AI-Security' };
     providerMocks.createDiagnosticCollection.mockReturnValue(collection);
     providerMocks.shouldAnalyzeFile.mockReturnValue(true);
     providerMocks.analyze.mockReturnValue(result as never);
@@ -195,7 +195,7 @@ describe('extension providers', () => {
     providerMocks.getDiagnostics.mockReturnValue([
       {
         range,
-        source: 'TokenLint',
+        source: 'AI-Security',
         code: 'security.promptInjection',
         message: 'Suspicious instruction'
       },
@@ -292,12 +292,12 @@ describe('extension providers', () => {
       range as never,
       {
         diagnostics: [
-          { source: 'TokenLint', code: 'optimization.duplicateInstruction', range: { start: { line: 0 } } },
-          { source: 'TokenLint', code: 'retrieval.topKRisk', range: { start: { line: 1 } } },
-          { source: 'TokenLint', code: 'security.promptInjection', range: { start: { line: 2 } } },
-          { source: 'TokenLint', code: 'security.externalEndpoint', range: { start: { line: 3 } } },
-          { source: 'TokenLint', code: 'security.encodedPayload', range: { start: { line: 4 } } },
-          { source: 'TokenLint', code: 'skills.maliciousSkillTest', range: { start: { line: 5 } } },
+          { source: 'AI-Security', code: 'optimization.duplicateInstruction', range: { start: { line: 0 } } },
+          { source: 'AI-Security', code: 'retrieval.topKRisk', range: { start: { line: 1 } } },
+          { source: 'AI-Security', code: 'security.promptInjection', range: { start: { line: 2 } } },
+          { source: 'AI-Security', code: 'security.externalEndpoint', range: { start: { line: 3 } } },
+          { source: 'AI-Security', code: 'security.encodedPayload', range: { start: { line: 4 } } },
+          { source: 'AI-Security', code: 'skills.maliciousSkillTest', range: { start: { line: 5 } } },
           { source: 'other', code: 'ignored', range: { start: { line: 6 } } }
         ]
       } as never
@@ -311,7 +311,7 @@ describe('extension providers', () => {
     const payloadEdit = actions[4].edit as unknown as { replacements: Array<{ text: string }> };
     const skillTestEdit = actions[5].edit as unknown as { replacements: Array<{ text: string }> };
     expect(actions[0]).toMatchObject({
-      title: 'TokenLint: Remove duplicate instruction',
+      title: 'AI-Security: Remove duplicate instruction',
       isPreferred: true
     });
     expect(duplicateEdit.deletes).toEqual([{ uri: 'file:///prompt.md', range: 'line-0' }]);

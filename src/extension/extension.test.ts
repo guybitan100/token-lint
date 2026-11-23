@@ -183,7 +183,7 @@ describe('extension activation', () => {
 
     activate(context as never);
 
-    expect(extensionMocks.statusBar.text).toBe('TokenLint: Ready');
+    expect(extensionMocks.statusBar.text).toBe('AI-Security: Ready');
     expect(extensionMocks.statusBar.show).toHaveBeenCalled();
     expect(extensionMocks.registerWebviewViewProvider).toHaveBeenCalledWith(
       'tokenlint.sidebar',
@@ -207,7 +207,7 @@ describe('extension activation', () => {
 
     await extensionMocks.commandHandlers.get('tokenlint.scanCurrentFile')?.();
     expect(extensionMocks.scanCurrentFile).toHaveBeenCalledWith(extensionMocks.diagnosticsInstance);
-    expect(extensionMocks.statusBar.text).toBe('TokenLint: 3 findings | 30 tokens');
+    expect(extensionMocks.statusBar.text).toBe('AI-Security: 3 findings | 30 tokens');
 
     extensionMocks.state.activeTextEditor = undefined;
     await extensionMocks.commandHandlers.get('tokenlint.scanCurrentFile')?.();
@@ -251,7 +251,7 @@ describe('extension activation', () => {
     extensionMocks.state.saveHandler?.(analyzedDocument);
 
     expect(extensionMocks.diagnosticsInstance.scan).toHaveBeenCalledWith(analyzedDocument);
-    expect(extensionMocks.statusBar.text).toBe('TokenLint: 4 findings | 44 tokens');
+    expect(extensionMocks.statusBar.text).toBe('AI-Security: 4 findings | 44 tokens');
   });
 
   it('deactivate is a no-op', () => {

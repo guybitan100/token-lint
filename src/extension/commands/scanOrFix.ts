@@ -10,7 +10,7 @@ type QuickAction = {
 const QUICK_ACTIONS: QuickAction[] = [
   {
     label: 'Scan Current File',
-    description: 'Analyze the active editor and refresh TokenLint diagnostics.',
+    description: 'Analyze the active editor and refresh AI-Security diagnostics.',
     command: 'tokenlint.scanCurrentFile',
     requiresActiveEditor: true
   },
@@ -35,7 +35,7 @@ const QUICK_ACTIONS: QuickAction[] = [
 
 export async function scanOrFix() {
   const selected = await vscode.window.showQuickPick(QUICK_ACTIONS, {
-    title: 'TokenLint: Scan / Fix...',
+    title: 'AI-Security: Scan / Fix...',
     matchOnDescription: true,
     placeHolder: 'Choose a scan, preview, or safe-fix action'
   });
@@ -46,7 +46,7 @@ export async function scanOrFix() {
 
   if (selected.requiresActiveEditor && !vscode.window.activeTextEditor) {
     vscode.window.showInformationMessage(
-      'TokenLint: Open a file in the editor to run that action.'
+      'AI-Security: Open a file in the editor to run that action.'
     );
     return;
   }

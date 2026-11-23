@@ -6,14 +6,14 @@ export async function scanCurrentFile(provider: TokenLintDiagnosticProvider) {
   const editor = vscode.window.activeTextEditor;
   if (!editor) {
     vscode.window.showInformationMessage(
-      'TokenLint: Open a file in the editor to scan it.'
+      'AI-Security: Open a file in the editor to scan it.'
     );
     return;
   }
 
   if (!shouldAnalyzeFile(editor.document.fileName)) {
     vscode.window.showInformationMessage(
-      `TokenLint skipped ${getSkipReason(editor.document.fileName)}`
+      `AI-Security skipped ${getSkipReason(editor.document.fileName)}`
     );
     return;
   }
@@ -21,6 +21,6 @@ export async function scanCurrentFile(provider: TokenLintDiagnosticProvider) {
   const result = provider.scan(editor.document);
 
   vscode.window.showInformationMessage(
-    `TokenLint: ${result.metrics.findingCount} findings, ${result.metrics.totalTokens} tokens`
+    `AI-Security: ${result.metrics.findingCount} findings, ${result.metrics.totalTokens} tokens`
   );
 }

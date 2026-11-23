@@ -14,11 +14,11 @@ export class TokenLintCodeActionProvider implements vscode.CodeActionProvider {
     const actions: vscode.CodeAction[] = [];
 
     for (const diagnostic of context.diagnostics) {
-      if (diagnostic.source !== 'TokenLint') continue;
+      if (diagnostic.source !== 'AI-Security') continue;
 
       if (diagnostic.code === 'optimization.duplicateInstruction') {
         const action = new vscode.CodeAction(
-          'TokenLint: Remove duplicate instruction',
+          'AI-Security: Remove duplicate instruction',
           vscode.CodeActionKind.QuickFix
         );
 
@@ -34,7 +34,7 @@ export class TokenLintCodeActionProvider implements vscode.CodeActionProvider {
 
       if (diagnostic.code === 'retrieval.topKRisk') {
         const action = new vscode.CodeAction(
-          'TokenLint: Reduce top_k to 6',
+          'AI-Security: Reduce top_k to 6',
           vscode.CodeActionKind.QuickFix
         );
 
@@ -49,7 +49,7 @@ export class TokenLintCodeActionProvider implements vscode.CodeActionProvider {
 
       if (diagnostic.code === 'security.promptInjection') {
         const action = new vscode.CodeAction(
-          'TokenLint: Neutralize suspicious instruction',
+          'AI-Security: Neutralize suspicious instruction',
           vscode.CodeActionKind.QuickFix
         );
 
@@ -72,7 +72,7 @@ export class TokenLintCodeActionProvider implements vscode.CodeActionProvider {
 
       if (diagnostic.code === 'security.externalEndpoint') {
         const action = new vscode.CodeAction(
-          'TokenLint: Comment external endpoint for review',
+          'AI-Security: Comment external endpoint for review',
           vscode.CodeActionKind.QuickFix
         );
 
@@ -87,7 +87,7 @@ export class TokenLintCodeActionProvider implements vscode.CodeActionProvider {
 
       if (diagnostic.code === 'security.encodedPayload') {
         const action = new vscode.CodeAction(
-          'TokenLint: Replace encoded payload with review marker',
+          'AI-Security: Replace encoded payload with review marker',
           vscode.CodeActionKind.QuickFix
         );
 
@@ -102,7 +102,7 @@ export class TokenLintCodeActionProvider implements vscode.CodeActionProvider {
 
       if (diagnostic.code === 'skills.maliciousSkillTest') {
         const action = new vscode.CodeAction(
-          'TokenLint: Disable suspicious skill test',
+          'AI-Security: Disable suspicious skill test',
           vscode.CodeActionKind.QuickFix
         );
 

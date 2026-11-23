@@ -22,7 +22,7 @@ export async function showFixGraph() {
   const editor = vscode.window.activeTextEditor;
   if (!editor) {
     vscode.window.showInformationMessage(
-      'TokenLint: Open a file in the editor to visualize before/after changes.'
+      'AI-Security: Open a file in the editor to visualize before/after changes.'
     );
     return;
   }
@@ -31,7 +31,7 @@ export async function showFixGraph() {
 
   if (!shouldAnalyzeFile(document.fileName)) {
     vscode.window.showInformationMessage(
-      `TokenLint skipped ${getSkipReason(document.fileName)}`
+      `AI-Security skipped ${getSkipReason(document.fileName)}`
     );
     return;
   }
@@ -41,7 +41,7 @@ export async function showFixGraph() {
   const fixes = fixesFromFindings(before.findings);
 
   if (!fixes.length) {
-    vscode.window.showInformationMessage('TokenLint: No fixes available to visualize.');
+    vscode.window.showInformationMessage('AI-Security: No fixes available to visualize.');
     return;
   }
 
@@ -70,7 +70,7 @@ export function showFixGraphPreview(model: {
   const remainingFixes = fixesFromFindings(after.findings);
   const panel = vscode.window.createWebviewPanel(
     'tokenlint.fixGraph',
-    'TokenLint: Before / After Graph',
+    'AI-Security: Before / After Graph',
     vscode.ViewColumn.Beside,
     {
       enableScripts: false
@@ -508,7 +508,7 @@ function buildFixGraphHtml(model: {
 <body>
   <div class="page">
     <section class="hero">
-      <div class="eyebrow">TokenLint Fix Preview</div>
+      <div class="eyebrow">AI-Security Fix Preview</div>
       <h1>What changed, and what still needs review</h1>
       <div class="subtitle">
         This graph compares the active file against a safe-fix preview. The editor is unchanged until you run Apply All Safe Fixes.
@@ -525,7 +525,7 @@ function buildFixGraphHtml(model: {
       <div class="summary-card">
         <div class="summary-label">Safe fixes available</div>
         <div class="summary-value">${model.beforeFixCounts.safe}</div>
-        <div class="summary-copy">Automatic changes TokenLint can preview without editing the file.</div>
+        <div class="summary-copy">Security changes AI-Security can preview without editing the file.</div>
       </div>
       <div class="summary-card">
         <div class="summary-label">Review-required now</div>

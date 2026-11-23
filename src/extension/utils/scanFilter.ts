@@ -20,7 +20,7 @@ type CachedIgnoreFile = {
 
 type ScannableKind = 'markdown' | 'prompt' | 'yaml' | 'json' | 'typescript' | 'python';
 
-const ignoreFileName = '.tokenlintignore';
+const ignoreFileNames = ['.ai-securityignore', '.tokenlintignore'];
 const workspaceScanGlob = '**/*.{md,prompt,yaml,yml,json,ts,tsx,py}';
 const ignoreFileCache = new Map<string, CachedIgnoreFile>();
 const scannableKinds = new Set<ScannableKind>([
@@ -90,7 +90,13 @@ function globToRegExp(glob: string): RegExp {
 }
 
 function readIgnorePatterns(rootPath: string): IgnorePattern[] {
-  const ignorePath = path.join(rootPath, ignoreFileName);
+  const ignorePath = ignoreFileNames
+    .map(fileName => path.join(rootPath, fileName))
+    .find(candidate => fs.existsSync(candidate));
+
+  if (!ignorePath) {
+    return [];
+  }
 
   try {
     const stats = fs.statSync(ignorePath);

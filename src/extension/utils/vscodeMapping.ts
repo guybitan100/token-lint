@@ -26,7 +26,7 @@ export function toDiagnostic(finding: TokenLintFinding): vscode.Diagnostic {
     toVsCodeSeverity(finding.severity)
   );
 
-  diagnostic.source = 'TokenLint';
+  diagnostic.source = 'AI-Security';
   diagnostic.code = finding.ruleId;
 
   return diagnostic;
